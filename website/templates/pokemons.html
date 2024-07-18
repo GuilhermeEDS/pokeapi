@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>{% block Pokedex %}{% endblock %}</title>
+    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+  </head>
+  <style>
+    .pokemon-imagem {
+        max-width: 100%; 
+        max-height: 100px;
+    }
+</style>
+  <body>
+    <table class="table" id="poketable">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Imagem</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Tipo Primário</th>
+          <th scope="col">Tipo Secundário</th>
+          <th scope="col">Altura</th>
+          <th scope="col">Peso</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pokemon in pokemons %}
+        <tr>
+          <td>{{ pokemon.numero }}</td>
+          <td><img class="pokemon-imagem" src={{ pokemon.imagem_url }} alt="{{pokemon.nome}}" /></td>
+          <td>{{ pokemon.nome }}</td>
+          <td>{{ pokemon.tipo1 }}</td>
+          <td>{{ pokemon.tipo2 }}</td>
+          <td>{{ pokemon.altura }}</td>
+          <td>{{ pokemon.peso }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+        <script>
+            $(document).ready(function () {
+              $('#poketable').DataTable({
+              "order": [[ 1, "desc" ]]
+              });
+            });
+          </script>
+  </body>
+</html>
